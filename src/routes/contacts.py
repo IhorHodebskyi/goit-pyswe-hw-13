@@ -13,6 +13,7 @@ router = APIRouter(prefix="/contacts", tags=["contacts"])
 @router.get("/", response_model=list[ContactResponse])
 async def get_contacts(limit: int = Query(10), offset: int = Query(0, ge=0), query: str | None = Query(None),
                        db: AsyncSession = Depends(get_db), current_user: User = Depends(auth_service.get_current_user)):
+    print("current_user", current_user)
     contacts = await repository_contacts.get_contacts(limit=limit, offset=offset, query=query, db=db, user=current_user)
     return contacts
 

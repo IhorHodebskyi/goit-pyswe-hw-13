@@ -39,6 +39,6 @@ async def upload_avatar(file: UploadFile = File(), db: AsyncSession = Depends(ge
         width=250, height=250, crop="fill", gravity="face", radius=40, corp="fill", version=upload_result.get("version")
     )
 
-    new_user = await repository_users.update_avatar(user=current_user, url=upload_result.get("url"), db=db)
+    new_user = await repository_users.update_avatar(email=current_user.email, url=upload_result.get("url"), db=db)
 
     return new_user
