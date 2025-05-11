@@ -20,3 +20,7 @@ class TokenShema(BaseModel):
     access_token: str
     refresh_token: str
     token_type: str = "Bearer"
+
+
+class RequestEmail(BaseModel):
+    email: EmailStr

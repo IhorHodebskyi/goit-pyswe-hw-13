@@ -43,3 +43,10 @@ async def update_token(user: UserShema, refresh_token: str | None, db: AsyncSess
     user.refresh_token = refresh_token
     db.add(user)
     await db.commit()
+
+
+async def confirmed_email(email: str, db: AsyncSession = Depends(get_db)) -> None:
+    user = await get_user_by_email(email=email, db=db)
+    user.confirmed = True
+    db.add(user)
+    await db.commit()
